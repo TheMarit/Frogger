@@ -79,9 +79,17 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
-
+    function checkCollisions(){
+        allEnemies.forEach(function(enemy) {
+            if(enemy.y == player.y){
+                if(Math.round(enemy.x * 100) / 100 == player.x){
+                    alert("you lose");
+                }
+            };
+        });
+    }
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -173,7 +181,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-pink-girl.png'
     ]);
     Resources.onReady(init);
 
