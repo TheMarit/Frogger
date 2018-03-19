@@ -34,22 +34,30 @@ Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.handleInput = function(key){
     if(key === "right"){
-        this.x += 1;
-    };
+        if(this.x < 4 ){
+            this.x += 1;
+        }
+    }
     if(key === "left"){
-        this.x -= 1;
-    };
+        if(this.x > 0){
+            this.x -= 1;
+        }
+    }
     if(key === "up"){
-        this.y -= 1;
-    };
+        if(this.y > 0){
+            this.y -= 1;
+        }
+    }
     if(key === "down"){
-        this.y += 1;
-    };
-    console.log(this.x);
+        if( this.y < 4.75){
+            this.y += 1;
+        }
+    }
+    
 };
 Player.prototype.update = function(){
     if(this.y < 0){
-        alert("you win");
+        // alert("you win");
     }
 };
 
