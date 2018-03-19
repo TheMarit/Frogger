@@ -13,7 +13,7 @@ var Enemy = function(speed, y, x) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    this.x += this.speed;
+    this.x += this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -45,14 +45,19 @@ Player.prototype.handleInput = function(key){
     if(key === "down"){
         this.y += 1;
     };
+    console.log(this.x);
 };
-Player.prototype.update = function(){};
+Player.prototype.update = function(){
+    if(this.y < 0){
+        alert("you win");
+    }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 // var allEnemies = [new Enemy(.1, 1.75, 0)];
-var allEnemies = [new Enemy(0.07, 1.75, -5), new Enemy(0.04, 2.75, 0), new Enemy(0.05, 0.75, 0), new Enemy(0.06, 1.75, -1), new Enemy(0.03, 1.75, -4), new Enemy(0.08, 2.75, -3),  ];
+var allEnemies = [new Enemy(1, 0.75, -2), new Enemy(2, 1.75, -1), new Enemy(1.5, 2.75, -1)];
 var player = new Player();
 
 // This listens for key presses and sends the keys to your
@@ -67,3 +72,9 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+function addBug(index){
+        var yOptions = [0.75, 1.75, 2.75];
+        let speed = Math.random() + 1;
+        return new Enemy(speed, yOptions[index], -1);
+}

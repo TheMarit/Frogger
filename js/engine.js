@@ -22,7 +22,8 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        bugs = 0;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -80,15 +81,24 @@ var Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        checkBugs();
     }
     function checkCollisions(){
         allEnemies.forEach(function(enemy) {
             if(enemy.y == player.y){
-                if(Math.round(enemy.x * 100) / 100 == player.x){
+                var xPosition = player.x;
+                if(Math.round(enemy.x * 100) / 100 >= xPosition - 0.7 && Math.round(enemy.x * 100) / 100 <= xPosition + 0.7){
                     alert("you lose");
                 }
-            };
+            }
         });
+    }
+    function checkBugs(){
+        for (const [index, value] of allEnemies.entries()) {
+            if(value.x > 5){
+                allEnemies[index] = addBug(index);
+            }
+        };
     }
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
