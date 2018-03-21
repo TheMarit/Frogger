@@ -23,7 +23,8 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime,
-        bugs = 0;
+        loses = 0,
+        wins = 0;
 
     canvas.width = 505;
     canvas.height = 606;
@@ -82,16 +83,31 @@ var Engine = (function(global) {
         updateEntities(dt);
         checkCollisions();
         checkBugs();
+        checkWin();
     }
     function checkCollisions(){
         allEnemies.forEach(function(enemy) {
             if(enemy.y == player.y){
                 var xPosition = player.x;
                 if(Math.round(enemy.x * 100) / 100 >= xPosition - 0.7 && Math.round(enemy.x * 100) / 100 <= xPosition + 0.7){
-                    alert("you lose");
+                    player.x = 2;
+                    player.y = 3.75;
+                    loses += 1;
+                    var lose = document.querySelector(".miss");
+                    lose.innerHTML = loses;
                 }
             }
         });
+    }
+    function checkWin(){
+        if(player.y < 0){
+            player.x = 2;
+            player.y = 3.75;
+            wins += 1;
+            var win = document.querySelector(".succes");
+            win.innerHTML = wins;
+        }
+
     }
     function checkBugs(){
         for (const [index, value] of allEnemies.entries()) {

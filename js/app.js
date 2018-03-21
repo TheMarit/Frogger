@@ -56,9 +56,7 @@ Player.prototype.handleInput = function(key){
     
 };
 Player.prototype.update = function(){
-    if(this.y < 0){
-        // alert("you win");
-    }
+    
 };
 
 // Now instantiate your objects.
