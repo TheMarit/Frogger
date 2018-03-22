@@ -2,9 +2,12 @@ body {
     text-align: center;
     font-family: arial;
 }
+canvas{
+	margin-top: -30px;
+}
 .canvasText{
 	position: absolute;
-    top: 70px;
+    top: 40px;
     left: 0;
     right: 0;
     margin: auto;
@@ -13,7 +16,7 @@ body {
     justify-content: space-between;
 }
 .canvasText.bottom{
-	top: 549px;
+	top: 519px;
 	width: 496px;
 }
 h3 {
