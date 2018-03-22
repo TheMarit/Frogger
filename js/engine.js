@@ -23,7 +23,7 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime,
-        loses = 0,
+        loses = 3,
         wins = 0;
 
     canvas.width = 505;
@@ -92,7 +92,7 @@ var Engine = (function(global) {
                 if(Math.round(enemy.x * 100) / 100 >= xPosition - 0.7 && Math.round(enemy.x * 100) / 100 <= xPosition + 0.7){
                     player.x = 2;
                     player.y = 3.75;
-                    loses += 1;
+                    loses -= 1;
                     var lose = document.querySelector(".miss");
                     lose.innerHTML = loses;
                 }
@@ -103,7 +103,7 @@ var Engine = (function(global) {
         if(player.y < 0){
             player.x = 2;
             player.y = 3.75;
-            wins += 1;
+            wins += 500;
             var win = document.querySelector(".succes");
             win.innerHTML = wins;
         }
@@ -208,7 +208,8 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-pink-girl.png'
+        'images/char-pink-girl.png',
+        'images/GemBlue.png'
     ]);
     Resources.onReady(init);
 
