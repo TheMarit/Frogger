@@ -24,7 +24,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime,
         loses = 3,
-        wins = 0;
+        wins = 0,
+        level = 1;
 
     canvas.width = 505;
     canvas.height = 590;
@@ -110,6 +111,9 @@ var Engine = (function(global) {
             wins += 500;
             var win = document.querySelector(".succes");
             win.innerHTML = wins;
+            level += 1;
+            document.querySelector(".level").innerHTML = level;
+
         }
 
     }
@@ -205,7 +209,8 @@ var Engine = (function(global) {
         document.querySelector(".succes").innerHTML = 0;
         document.querySelector(".miss").innerHTML = 3;
         Player.block = false;
-        
+        level = 1;
+        document.querySelector(".level").innerHTML = 1;
     }
 
     /* Go ahead and load all of the images we know we're going to need to

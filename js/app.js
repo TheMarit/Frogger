@@ -62,6 +62,16 @@ var Gem = function(x, y){
 Gem.prototype = Object.create(Enemy.prototype);
 Gem.prototype.constructor = Gem;
 
+// Heart
+var Heart = function(x, y){
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Heart.png';
+};
+
+Heart.prototype = Object.create(Enemy.prototype);
+Heart.prototype.constructor = Heart;
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
