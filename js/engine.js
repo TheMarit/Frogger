@@ -95,6 +95,10 @@ var Engine = (function(global) {
                     loses -= 1;
                     var lose = document.querySelector(".miss");
                     lose.innerHTML = loses;
+                    if(loses === 0){
+                       document.querySelector(".gameover").style.opacity = 1;
+                       Player.block = true;
+                    }
                 }
             }
         });
@@ -195,7 +199,13 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        document.querySelector(".gameover").style.opacity = 0;
+        loses = 3;
+        wins = 0;
+        document.querySelector(".succes").innerHTML = 0;
+        document.querySelector(".miss").innerHTML = 3;
+        Player.block = false;
+        
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -218,4 +228,13 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+
+    document.addEventListener('keyup', function(e) {
+        console.log(document.querySelector(".gameover").style.opacity);
+        if(document.querySelector(".gameover").style.opacity == 1){
+            if(e.key === "Enter"){
+                reset();
+            }
+        }
+    });
 })(this);

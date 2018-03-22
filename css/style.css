@@ -35,3 +35,18 @@ h4 {
     -webkit-text-stroke-color: black;
     margin: 0;
 }
+.gameover{
+	position: absolute;
+    top: 250px;
+    right: 0;
+    left: 0;
+    width: 400px;
+    height: 150px;
+    margin: auto;
+    background: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}

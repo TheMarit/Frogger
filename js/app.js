@@ -18,29 +18,32 @@ var Player = function(){
     this.x = 2;
     this.y = 3.75;
     this.sprite = 'images/char-pink-girl.png';
+    this.block = false;
 };
 
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.handleInput = function(key){
-    if(key === "right"){
-        if(this.x < 4 ){
-            this.x += 1;
+    if(!Player.block){
+        if(key === "right"){
+            if(this.x < 4 ){
+                this.x += 1;
+            }
         }
-    }
-    if(key === "left"){
-        if(this.x > 0){
-            this.x -= 1;
+        if(key === "left"){
+            if(this.x > 0){
+                this.x -= 1;
+            }
         }
-    }
-    if(key === "up"){
-        if(this.y > 0){
-            this.y -= 1;
+        if(key === "up"){
+            if(this.y > 0){
+                this.y -= 1;
+            }
         }
-    }
-    if(key === "down"){
-        if( this.y < 4.75){
-            this.y += 1;
+        if(key === "down"){
+            if( this.y < 4.75){
+                this.y += 1;
+            }
         }
     }
     
