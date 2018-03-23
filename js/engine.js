@@ -22,10 +22,9 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime,
-        loses = 3,
-        wins = 0,
-        level = 1;
+        lastTime;
+        
+        
 
     canvas.width = 505;
     canvas.height = 590;
@@ -82,41 +81,10 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
         checkBugs();
-        checkWin();
     }
-    function checkCollisions(){
-        allEnemies.forEach(function(enemy) {
-            if(enemy.y == player.y){
-                var xPosition = player.x;
-                if(Math.round(enemy.x * 100) / 100 >= xPosition - 0.7 && Math.round(enemy.x * 100) / 100 <= xPosition + 0.7){
-                    player.x = 2;
-                    player.y = 3.75;
-                    loses -= 1;
-                    var lose = document.querySelector(".miss");
-                    lose.innerHTML = loses;
-                    if(loses === 0){
-                       document.querySelector(".gameover").style.opacity = 1;
-                       Player.block = true;
-                    }
-                }
-            }
-        });
-    }
-    function checkWin(){
-        if(player.y < 0){
-            player.x = 2;
-            player.y = 3.75;
-            wins += 500;
-            var win = document.querySelector(".succes");
-            win.innerHTML = wins;
-            level += 1;
-            document.querySelector(".level").innerHTML = level;
-
-        }
-
-    }
+    
+    
     function checkBugs(){
         for (const [index, value] of allEnemies.entries()) {
             if(value.x > 5){
@@ -136,6 +104,9 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        gems.forEach(function(gem) {
+            gem.update(dt);
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -196,6 +167,13 @@ var Engine = (function(global) {
         });
 
         player.render();
+        gems.forEach(function(gem) {
+            gem.render();
+        });
+        hearts.forEach(function(heart) {
+            heart.render();
+        });
+        
     }
 
     /* This function does nothing but it could have been a good place to
@@ -235,7 +213,6 @@ var Engine = (function(global) {
     global.ctx = ctx;
 
     document.addEventListener('keyup', function(e) {
-        console.log(document.querySelector(".gameover").style.opacity);
         if(document.querySelector(".gameover").style.opacity == 1){
             if(e.key === "Enter"){
                 reset();
