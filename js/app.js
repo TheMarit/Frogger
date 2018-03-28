@@ -47,8 +47,9 @@ Player.prototype.handleInput = function(key){
             }
         }
         checkCollisionsGems();
+        checkCollisionsHearts();
         checkWin();
-        checkCollisions();
+        
     }
     
 };
@@ -78,6 +79,9 @@ var Heart = function(x, y){
 
 Heart.prototype = Object.create(Enemy.prototype);
 Heart.prototype.constructor = Heart;
+Heart.prototype.update = function(){
+    
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -119,6 +123,18 @@ function checkCollisionsGems(){
             }
         });
     }
+function checkCollisionsHearts(){
+        hearts.forEach(function(heart) {
+            console.log("looping over heart");
+            if(heart.y == player.y && heart.x == player.x){
+                hearts = [];
+                loses += 1;
+                var lose = document.querySelector(".miss");
+                lose.innerHTML = loses;
+            }
+        });
+
+    }
 function checkWin(){
         if(player.y < 0){
             player.x = 2;
@@ -137,9 +153,16 @@ function checkLevel(){
                 gems.push(new Gem(3, 0.75));
             }
         }
+        if(level === 3){
+            if(hearts.length === 0){
+                console.log("add heart");
+                hearts.push(new Heart(2, 1.75));
+            }
+        }
     }
     
 function checkCollisions(){
+    console.log("checking collisions")
     allEnemies.forEach(function(enemy) {
         if(enemy.y == player.y){
             var xPosition = player.x;

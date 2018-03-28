@@ -107,6 +107,9 @@ var Engine = (function(global) {
         gems.forEach(function(gem) {
             gem.update(dt);
         });
+        hearts.forEach(function(heart) {
+            heart.update(dt);
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -173,7 +176,7 @@ var Engine = (function(global) {
         hearts.forEach(function(heart) {
             heart.render();
         });
-        
+        checkCollisions();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -202,7 +205,8 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-pink-girl.png',
-        'images/GemBlue.png'
+        'images/GemBlue.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 
