@@ -16,7 +16,7 @@ Enemy.prototype.render = function() {
 // Player
 var Player = function(){
     this.x = 2;
-    this.y = 3.75;
+    this.y = 4.75;
     this.sprite = 'images/char-pink-girl.png';
     this.block = false;
 };
@@ -96,7 +96,6 @@ Rock.prototype.update = function(){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-// var allEnemies = [new Enemy(.1, 1.75, 0)];
 var allEnemies = [new Enemy(1, 0.75, -2), new Enemy(2, 1.75, -1), new Enemy(1.5, 2.75, -1)];
 var player = new Player();
 var gems = [];
@@ -141,7 +140,7 @@ function checkForRocks(key, playerX, playerY){
     return movable;
 }
 function addBug(index){
-        var yOptions = [0.75, 1.75, 2.75];
+        var yOptions = [0.75, 1.75, 2.75, 3.75];
         let speed = Math.random() + 1;
         return new Enemy(speed, yOptions[index], -1);
 }
@@ -172,7 +171,7 @@ function checkCollisionsHearts(){
 function checkWin(){
         if(player.y < 0){
             player.x = 2;
-            player.y = 3.75;
+            player.y = 4.75;
             wins += 500;
             var win = document.querySelector(".succes");
             win.innerHTML = wins;
@@ -192,7 +191,12 @@ function checkLevel(){
                 gems.push(new Gem(1, 0.75));
                 rocks.push(new Rock(1, 1.75));
                 rocks.push(new Rock(0, 0.75));
-
+        }
+        if(level === 5){
+            allEnemies[3] = addBug(3);
+                rocks = [];
+                rocks.push(new Rock(3, 2.75));
+                rocks.push(new Rock(2, 1.75));
         }
     }
     
