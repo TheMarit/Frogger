@@ -110,6 +110,9 @@ var Engine = (function(global) {
         hearts.forEach(function(heart) {
             heart.update(dt);
         });
+        rocks.forEach(function(rock) {
+            rock.update(dt);
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -176,6 +179,9 @@ var Engine = (function(global) {
         hearts.forEach(function(heart) {
             heart.render();
         });
+        rocks.forEach(function(rock) {
+            rock.render();
+        });
         checkCollisions();
     }
 
@@ -206,7 +212,8 @@ var Engine = (function(global) {
         'images/char-boy.png',
         'images/char-pink-girl.png',
         'images/GemBlue.png',
-        'images/Heart.png'
+        'images/Heart.png',
+        'images/Rock.png'
     ]);
     Resources.onReady(init);
 

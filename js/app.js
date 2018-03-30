@@ -24,8 +24,7 @@ var Player = function(){
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.handleInput = function(key){
-    if(!Player.block){
-        
+    if(!Player.block && checkForRocks(key, this.x, this.y)){
         if(key === "right"){
             if(this.x < 4 ){
                 this.x += 1;
@@ -82,7 +81,18 @@ Heart.prototype.constructor = Heart;
 Heart.prototype.update = function(){
     
 };
+// Rocks
+var Rock = function(x, y){
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/Rock.png';
+};
 
+Rock.prototype = Object.create(Enemy.prototype);
+Rock.prototype.constructor = Rock;
+Rock.prototype.update = function(){
+    
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -91,6 +101,7 @@ var allEnemies = [new Enemy(1, 0.75, -2), new Enemy(2, 1.75, -1), new Enemy(1.5,
 var player = new Player();
 var gems = [];
 var hearts = [];
+var rocks = [];
 var level = 1;
 var wins = 0;
 var loses = 3;
@@ -108,6 +119,27 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+function checkForRocks(key, playerX, playerY){
+    var movable = true;
+    if(key == "right"){
+        playerX += 1;
+    }
+    if(key == "left"){
+        playerX -= 1;
+    }
+    if(key == "up"){
+        playerY -= 1;
+    }
+    if(key == "down"){
+        playerY += 1;
+    }
+    rocks.forEach(function(rock) {
+        if(rock.y == playerY && rock.x == playerX){
+            movable = false;
+        }
+    });
+    return movable;
+}
 function addBug(index){
         var yOptions = [0.75, 1.75, 2.75];
         let speed = Math.random() + 1;
@@ -125,7 +157,6 @@ function checkCollisionsGems(){
     }
 function checkCollisionsHearts(){
         hearts.forEach(function(heart) {
-            console.log("looping over heart");
             if(heart.y == player.y && heart.x == player.x){
                 hearts = [];
                 loses += 1;
@@ -135,6 +166,9 @@ function checkCollisionsHearts(){
         });
 
     }
+
+
+
 function checkWin(){
         if(player.y < 0){
             player.x = 2;
@@ -149,20 +183,20 @@ function checkWin(){
     }
 function checkLevel(){
         if(level === 2){
-            if(gems.length === 0){
                 gems.push(new Gem(3, 0.75));
-            }
         }
         if(level === 3){
-            if(hearts.length === 0){
-                console.log("add heart");
                 hearts.push(new Heart(2, 1.75));
-            }
+        }
+        if(level === 4){
+                gems.push(new Gem(1, 0.75));
+                rocks.push(new Rock(1, 1.75));
+                rocks.push(new Rock(0, 0.75));
+
         }
     }
     
 function checkCollisions(){
-    console.log("checking collisions")
     allEnemies.forEach(function(enemy) {
         if(enemy.y == player.y){
             var xPosition = player.x;
