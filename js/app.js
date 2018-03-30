@@ -185,9 +185,11 @@ function checkLevel(){
                 gems.push(new Gem(3, 0.75));
         }
         if(level === 3){
+                gems = [];
                 hearts.push(new Heart(2, 1.75));
         }
         if(level === 4){
+                hearts = [];
                 gems.push(new Gem(1, 0.75));
                 rocks.push(new Rock(1, 1.75));
                 rocks.push(new Rock(0, 0.75));
@@ -195,8 +197,69 @@ function checkLevel(){
         if(level === 5){
             allEnemies[3] = addBug(3);
                 rocks = [];
+                gems = [];
                 rocks.push(new Rock(3, 2.75));
                 rocks.push(new Rock(2, 1.75));
+        }
+        if(level === 6){
+                rocks = [];
+                rocks.push(new Rock(3, 3.75));
+                rocks.push(new Rock(2, 2.75));
+                rocks.push(new Rock(3, 1.75));
+                rocks.push(new Rock(3, 0.75));
+                gems.push(new Gem(3, 2.75));
+                hearts.push(new Heart(2, 1.75));
+        }
+        if(level === 7){
+                rocks = [];
+                gems = [];
+                hearts = [];
+                rocks.push(new Rock(4, 3.75));
+                rocks.push(new Rock(3, 2.75));
+                rocks.push(new Rock(2, 1.75));
+                rocks.push(new Rock(1, 0.75));
+        }
+        if(level === 8){
+                rocks = [];
+                gems = [];
+                hearts = [];
+                rocks.push(new Rock(4, 3.75));
+                rocks.push(new Rock(3, 3.75));
+                rocks.push(new Rock(2, 3.75));
+                rocks.push(new Rock(0, 1.75));
+                rocks.push(new Rock(1, 1.75));
+                rocks.push(new Rock(2, 1.75));
+                gems.push(new Gem(1,0.75));
+        }
+        if(level === 9){
+                rocks = [];
+                gems = [];
+                rocks.push(new Rock(1, 0.75));
+                rocks.push(new Rock(1, 1.75));
+                rocks.push(new Rock(1, 2.75));
+                rocks.push(new Rock(1, 3.75));
+                rocks.push(new Rock(3, 0.75));
+                rocks.push(new Rock(3, 1.75));
+                rocks.push(new Rock(3, 2.75));
+                rocks.push(new Rock(3, 3.75));
+                gems.push(new Gem(0,1.75));
+        }
+        if(level === 10){
+                rocks = [];
+                gems = [];
+                rocks.push(new Rock(0, 0.75));
+                rocks.push(new Rock(1, 0.75));
+                rocks.push(new Rock(3, 0.75));
+                rocks.push(new Rock(4, 0.75));
+                rocks.push(new Rock(1, 2.75));
+                rocks.push(new Rock(2, 2.75));
+                rocks.push(new Rock(3, 2.75));
+                gems.push(new Gem(0,1.75));
+        }
+        if (level === 11){
+            rocks = [];
+            gems = [];
+            alert("you win the game");
         }
     }
     
@@ -206,7 +269,7 @@ function checkCollisions(){
             var xPosition = player.x;
             if(Math.round(enemy.x * 100) / 100 >= xPosition - 0.7 && Math.round(enemy.x * 100) / 100 <= xPosition + 0.7){
                 player.x = 2;
-                player.y = 3.75;
+                player.y = 4.75;
                 loses -= 1;
                 var lose = document.querySelector(".miss");
                 lose.innerHTML = loses;
