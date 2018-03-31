@@ -169,6 +169,19 @@ function checkCollisionsHearts(){
 
 
 function checkWin(){
+        if(level === 10){
+            if(player.y < 0){
+                document.querySelector("#modal_text").innerHTML = "You win!!"
+                document.querySelector(".gameover").style.opacity = 1;
+                Player.block = true;
+                player.x = 2;
+                player.y = 4.75;
+                wins += 500;
+                var win = document.querySelector(".succes");
+                win.innerHTML = wins;
+                return
+            }
+        }
         if(player.y < 0){
             player.x = 2;
             player.y = 4.75;
@@ -256,11 +269,6 @@ function checkLevel(){
                 rocks.push(new Rock(3, 2.75));
                 gems.push(new Gem(0,1.75));
         }
-        if (level === 11){
-            rocks = [];
-            gems = [];
-            alert("you win the game");
-        }
     }
     
 function checkCollisions(){
@@ -275,6 +283,7 @@ function checkCollisions(){
                 lose.innerHTML = loses;
                 if(loses === 0){
                    document.querySelector(".gameover").style.opacity = 1;
+                   document.querySelector("#modal_text").innerHTML = "Game Over!"
                    Player.block = true;
                 }
             }
